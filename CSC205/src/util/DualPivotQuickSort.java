@@ -2,9 +2,7 @@ package util;
 
 public final class DualPivotQuickSort {
 
-    /**
-     * Prevents instantiation.
-     */
+    /** Prevents instantiation. */
     private DualPivotQuickSort() {
     }
 
@@ -191,7 +189,7 @@ public final class DualPivotQuickSort {
                 // replaced and pivot will be swapped back later.
                 array[mid] = array[left];
 
-                // initialize iterator variable for use in partitioning.
+                // initialize iterator variables for use in partitioning.
                 int l = left + 1;
                 int g = right - 1;
 
