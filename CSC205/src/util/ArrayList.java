@@ -103,7 +103,7 @@ public class ArrayList<E> implements List<E> {
      *
      * <p>
      * For this implementation of {@code List#remove(E)} The entire
-     * {@code internal Array is down-shifted by one and size is decremented
+     * {@code internal Array} is down-shifted by one and size is decremented
      * each time this method is called.
      *
      * @param input the element to remove
