@@ -92,11 +92,10 @@ public class LinkedPriorityQueue<E> implements Queue<E> {
     private int binarySearch(final int priority){
         int beg = 0;
         int end = size() - 1;
-        int mid;
         while ((end - beg) > 1) {
+            final int mid = (beg + end) >>> 1;
             final int cmp = Integer.compare(
-                    priority,
-                    internal.get(mid = (beg + end) >>> 1).priority
+                    priority, internal.get(mid).priority
             );
             if (cmp < 0) end = mid;
             else if (cmp > 0) beg = mid;
@@ -104,7 +103,7 @@ public class LinkedPriorityQueue<E> implements Queue<E> {
         }
         while(
                 beg < internal.size() &&
-                        internal.get(beg).priority < priority
+                internal.get(beg).priority < priority
         ) beg++;
         return beg;
     }

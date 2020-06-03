@@ -6,13 +6,10 @@ package util;
  * <p>A {@code LinkedList} is a {@code List} that stores its data in
  * {@code Link}s.
  *
- * <p>A {@code LinkedList} is less efficient than an {@code ArrayList}
- * when used for storing small {@code Object}s or boxed primitives. However,
- * a {@code LinkedList} is more efficient than an {@code ArrayList} when used
- * for storing large, expensive {@code Object}s. The main reason for this is
- * that the {@code LinkedList} can grow without copying its data, while the
- * {@code ArrayList} cannot. Therefore, it is a good idea for a programmer
- * to keep both of these tools under their belt.
+ * <p>A {@code LinkedList} is most efficient when used for storing large,
+ * expensive {@code Object}s. The main reason for this is that a {@code LinkedList}
+ * can grow without copying its data, while an {@code ArrayList} cannot. Therefore,
+ * it is a good idea for a programmer to keep both of these tools under their belt.
  *
  * @param <E> the type
  */
@@ -40,13 +37,11 @@ public class LinkedList<E> implements List<E> {
      * the root and leaf {@code Link}s and set the {@code size} equal to zero.
      */
     public LinkedList() {
-
         root = new Link<>();
         leaf = new Link<>();
         root.next = leaf;
         leaf.prev = root;
         size = 0;
-
     }
 
     /**
@@ -56,10 +51,8 @@ public class LinkedList<E> implements List<E> {
      * @param array the array to be converted.
      */
     public LinkedList(final E[] array){
-
         this();
         for(final E e: array) add(e);
-
     }
 
     /*
@@ -69,9 +62,8 @@ public class LinkedList<E> implements List<E> {
      * this method will start at the leaf.
      */
     private Link<E> navigateTo(final int index){
-
         Link<E> n;
-        if(index < (size / 2)) {
+        if(index < (size >>> 1)) {
             n = root.next;
             for (
                 int i = 0;
@@ -91,7 +83,6 @@ public class LinkedList<E> implements List<E> {
             );
         }
         return n;
-
     }
 
     /**
@@ -106,14 +97,12 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public E get(final int index) {
-
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(
                     "The given index is out of bounds."
             );
         }
         return navigateTo(index).store;
-
     }
 
     /**
@@ -129,7 +118,6 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public E remove(final int index) {
-
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(
                     "The given index is out of bounds."
@@ -138,7 +126,6 @@ public class LinkedList<E> implements List<E> {
         final Link<E> nav = navigateTo(index);
         size--;
         return unlink(nav);
-
     }
 
     /**
@@ -152,7 +139,6 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public boolean remove(final E element) {
-
         if(element == null) {
             for (Link<E> n = root.next; n.next != null; n = n.next) {
                 if (n.store == null) {
@@ -171,7 +157,6 @@ public class LinkedList<E> implements List<E> {
             }
         }
         return false;
-
     }
 
     /**
@@ -184,7 +169,6 @@ public class LinkedList<E> implements List<E> {
      * @return whether or not the element has been removed
      */
     public boolean removeAll(final E element) {
-
         boolean flag = false;
         if(element == null) {
             for(Link<E> n = root.next; n.next != null; n = n.next){
@@ -204,19 +188,16 @@ public class LinkedList<E> implements List<E> {
             }
         }
         return flag;
-
     }
 
     /*
      * A method to unlink the given Link from the List.
      */
     private E unlink(Link<E> nav){
-
         final E removal = nav.store;
         nav.next.prev = nav.prev;
         nav.prev.next = nav.next;
         return removal;
-
     }
 
     /**
@@ -232,14 +213,12 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public E set(final int index, final E element) {
-
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(
                     "The given index is out of bounds."
             );
         }
         return swap(navigateTo(index), element);
-
     }
 
     /*
@@ -247,11 +226,9 @@ public class LinkedList<E> implements List<E> {
      * to its storage and returning the previous occupant.
      */
     private E swap(final Link<E> candidate, final E element){
-
         final E removal = candidate.store;
         candidate.store = element;
         return removal;
-
     }
 
     /**
@@ -267,7 +244,6 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public void add(final int index, final E element) {
-
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException(
                     "The given index is out of bounds."
@@ -277,7 +253,6 @@ public class LinkedList<E> implements List<E> {
             insertLink(new Link<>(), navigateTo(index), element);
             size++;
         } else add(element);
-
     }
 
     /*
@@ -286,13 +261,11 @@ public class LinkedList<E> implements List<E> {
     private void insertLink(final Link<E> insertion,
                             final Link<E> candidate,
                             final E element){
-
         insertion.store = element;
         insertion.next = candidate;
         candidate.prev.next = insertion;
         insertion.prev = candidate.prev;
         candidate.prev = insertion;
-
     }
 
     /**
@@ -303,7 +276,6 @@ public class LinkedList<E> implements List<E> {
      * @param element the element to be appended to the {@code List}
      */
     public LinkedList<E> add(final E element) {
-
         Link<E> addition = new Link<>();
         leaf.store = element;
         leaf.next = addition;
@@ -311,7 +283,6 @@ public class LinkedList<E> implements List<E> {
         leaf = addition;
         size++;
         return this;
-
     }
 
     /**
@@ -319,7 +290,6 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public boolean replace(E candidate, E element){
-
         if(candidate == null){
             for(Link<E> n = root.next; n.next != null; n = n.next){
                 if(n.store == null) {
@@ -336,7 +306,6 @@ public class LinkedList<E> implements List<E> {
             }
         }
         return false;
-
     }
 
     /**
@@ -350,7 +319,6 @@ public class LinkedList<E> implements List<E> {
      * @return whether or not the element was replaced successfully
      */
     public boolean replaceAll(E candidate, E element){
-
         boolean flag = false;
         if(candidate == null){
             for(Link<E> n = root.next; n.next != null; n = n.next){
@@ -368,7 +336,6 @@ public class LinkedList<E> implements List<E> {
             }
         }
         return flag;
-
     }
 
     /**
@@ -384,7 +351,6 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public int indexOf(final E element) {
-
         if(size == 0) return -1;
         int i = 0;
         if(element == null) {
@@ -399,7 +365,6 @@ public class LinkedList<E> implements List<E> {
             }
         }
         return -1;
-
     }
 
     /**
@@ -407,9 +372,7 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public int size() {
-
         return size;
-
     }
 
     /**
@@ -417,9 +380,7 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public boolean isEmpty() {
-
         return size == 0;
-
     }
 
     /**
@@ -427,7 +388,6 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public String toString() {
-
         int i = 0;
         final StringBuilder out = new StringBuilder("[");
         for (Link<E> n = root.next; n.next != null; n = n.next) {
@@ -437,7 +397,6 @@ public class LinkedList<E> implements List<E> {
             }
         }
         return out.append("]").toString();
-
     }
 
     /**
@@ -445,7 +404,6 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public String toStore() {
-
         int i = 0;
         final StringBuilder out = new StringBuilder("[");
         for (Link<E> n = root; n != null; n = n.next) {
@@ -455,7 +413,6 @@ public class LinkedList<E> implements List<E> {
             }
         }
         return out.append("]").toString();
-
     }
 
     /**
@@ -463,14 +420,12 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public int hashCode() {
-
         int hash = 1;
         for (Link<E> n = root.next; n.next != null; n = n.next) {
             hash = EllieCollections.HASH_CODE_CONST * hash +
                     (n.store != null ? n.hashCode() : 0);
         }
         return hash;
-
     }
 
     /**
@@ -479,7 +434,6 @@ public class LinkedList<E> implements List<E> {
     @Override
     @SuppressWarnings("Unchecked")
     public boolean equals(Object other) {
-
         if (this == other) return true;
         if (other == null) return false;
         if (!(other instanceof LinkedList)) return false;
@@ -489,11 +443,8 @@ public class LinkedList<E> implements List<E> {
              Link<E> n = root.next, on = cast.root.next;
              n.next != null && on.next != null;
              n = n.next, on = on.next
-        ) {
-            if (!n.equals(on)) return false;
-        }
+        ) if (!n.equals(on)) return false;
         return true;
-
     }
 
     /**
@@ -501,7 +452,6 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public Object[] toArray() {
-
         Object[] array = new Object[size];
         int i = 0;
         for (Link<E> navigator = root.next;
@@ -513,7 +463,6 @@ public class LinkedList<E> implements List<E> {
         root.next = leaf;
         leaf.prev = root;
         return array;
-
     }
 
 }

@@ -8,7 +8,7 @@ package util;
  * @author Ellie Moore
  * @version 05.09.2020
  */
-final class Element<E> {
+public final class Element<E> {
 
     /**
      * The priority of the {@code Element}.

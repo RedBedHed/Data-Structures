@@ -16,12 +16,12 @@ public final class Link<E> {
     protected E store;
 
     /**
-     * A pointer to the next {@code Link}.
+     * A reference to the next {@code Link}.
      */
     protected Link<E> next;
 
     /**
-     * A pointer to the previous {@code Link}.
+     * A reference to the previous {@code Link}.
      */
     protected Link<E> prev;
 
@@ -31,10 +31,8 @@ public final class Link<E> {
      * @return an integer representative of the {@code Link}
      */
     @Override
-    public int hashCode(){
-
+    public int hashCode() {
         return store.hashCode();
-
     }
 
     /**
@@ -47,11 +45,8 @@ public final class Link<E> {
     @SuppressWarnings("Unchecked")
     public boolean equals(Object other){
 
-        if(this == other){
-            return true;
-        }else if(!(other instanceof Link)){
-            return false;
-        }
+        if(this == other) return true;
+        else if(!(other instanceof Link)) return false;
         final Link<E> cast = (Link<E>) other;
         return this.store.equals(cast.store);
 

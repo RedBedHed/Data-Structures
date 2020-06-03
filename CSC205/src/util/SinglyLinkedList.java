@@ -8,10 +8,10 @@ package util;
  *
  * <p>
  * A {@code LinkedList} is an efficient way to store large, complex
- * Objects, as a {@code LinkedList} doesn't need to copy it's elements
+ * Objects, as a {@code LinkedList} doesn't need to copy its elements
  * during growth. However, a {@code LinkedList} is likely to be less
  * efficient than an {@code ArrayList} when used for storing small
- * Objects or boxed primitives as random access is not possible.
+ * Objects or boxed primitives as random access is impossible.
  *
  * @author Ellie Moore
  * @version 04.08.2020
@@ -42,9 +42,7 @@ public class SinglyLinkedList<E> implements List<E> {
      * @param array the array to be converted.
      */
     public SinglyLinkedList(final E[] array){
-
         for(final E e: array) add(e);
-
     }
 
     /*
@@ -58,6 +56,11 @@ public class SinglyLinkedList<E> implements List<E> {
         public Link<E> prev;
         public Link<E> curr;
 
+        public Navigator(Link<E> prev, Link<E> curr){
+            this.prev = prev;
+            this.curr = curr;
+        }
+
     }
 
     /*
@@ -66,10 +69,7 @@ public class SinglyLinkedList<E> implements List<E> {
      * (or behind from the client's perspective).
      */
     private Navigator<E> navigateTo(final int index){
-
-        final Navigator<E> n = new Navigator<>();
-        n.prev = head;
-        n.curr = head.next;
+        final Navigator<E> n = new Navigator<>(head, head.next);
         for(
                 int i = 1;
                 n.curr != null
@@ -79,7 +79,6 @@ public class SinglyLinkedList<E> implements List<E> {
                 i++
         );
         return n;
-
     }
 
     /*
@@ -87,7 +86,6 @@ public class SinglyLinkedList<E> implements List<E> {
      * AT that index.
      */
     private Link<E> navigateToLinkAt(final int index){
-
         Link<E> c = head;
         for (
                 int i = 1;
@@ -96,7 +94,6 @@ public class SinglyLinkedList<E> implements List<E> {
                 c = c.next, i++
         );
         return c;
-
     }
 
     /**
@@ -114,7 +111,6 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public void add(final int index, final E element) {
-
         if (index < 1 || index > size + 1){
             throw new IndexOutOfBoundsException(
                     "The given index is out of bounds."
@@ -131,7 +127,6 @@ public class SinglyLinkedList<E> implements List<E> {
             insertion.next = nav.curr;
         }
         size++;
-
     }
 
     /**
@@ -139,10 +134,8 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public List<E> add(final E element) {
-
         add(size + 1, element);
         return this;
-
     }
 
     /**
@@ -158,7 +151,6 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public E set(final int index, final E element) {
-
         if (index < 1 || index > size){
             throw new IndexOutOfBoundsException(
                     "The given index is out of bounds."
@@ -168,7 +160,6 @@ public class SinglyLinkedList<E> implements List<E> {
         final E removal = curr.store;
         curr.store = element;
         return removal;
-
     }
 
     /**
@@ -183,14 +174,12 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public E get(final int index){
-
         if (index < 1 || index > size){
             throw new IndexOutOfBoundsException(
                     "The given index is out of bounds."
             );
         }
         return navigateToLinkAt(index).store;
-
     }
 
     /**
@@ -203,7 +192,6 @@ public class SinglyLinkedList<E> implements List<E> {
      * @return whether or not the removal was successful
      */
     public boolean remove(final E element) {
-
         if (head == null) return false;
         if (element == null) {
             if (head.store == null) {
@@ -241,7 +229,6 @@ public class SinglyLinkedList<E> implements List<E> {
             }
         }
         return false;
-
     }
 
     /**
@@ -254,7 +241,6 @@ public class SinglyLinkedList<E> implements List<E> {
      * @return whether or not the removal was successful
      */
     public boolean removeAll(final E element) {
-
         if (head == null) return false;
         boolean isRemoved = false;
         if (element == null) {
@@ -299,7 +285,6 @@ public class SinglyLinkedList<E> implements List<E> {
             }
         }
         return isRemoved;
-
     }
 
     /**
@@ -314,7 +299,6 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public E remove(final int index) {
-
         if (index < 1 || index > size){
             throw new IndexOutOfBoundsException(
                     "The given index is out of bounds."
@@ -325,7 +309,6 @@ public class SinglyLinkedList<E> implements List<E> {
         nav.prev.next = nav.curr.next;
         size--;
         return nav.curr.store;
-
     }
 
     /**
@@ -339,7 +322,6 @@ public class SinglyLinkedList<E> implements List<E> {
      * @return whether or not the replacement was successful
      */
     public boolean replace(final E element, final E candidate){
-
         if (head == null) return false;
         if (element == null) {
             for (
@@ -366,7 +348,6 @@ public class SinglyLinkedList<E> implements List<E> {
             }
         }
         return false;
-
     }
 
 
@@ -381,7 +362,6 @@ public class SinglyLinkedList<E> implements List<E> {
      * @return whether or not the replacement was successful
      */
     public boolean replaceAll(final E element, final E candidate){
-
         if (head == null) return false;
         boolean isReplaced = false;
         if (element == null) {
@@ -409,7 +389,6 @@ public class SinglyLinkedList<E> implements List<E> {
             }
         }
         return isReplaced;
-
     }
 
     /**
@@ -417,7 +396,6 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public int indexOf(final E element) {
-
         if(head == null) return -1;
         int i = size;
         if (element == null) {
@@ -431,7 +409,6 @@ public class SinglyLinkedList<E> implements List<E> {
             }
         }
         return -1;
-
     }
 
     /**
@@ -443,7 +420,6 @@ public class SinglyLinkedList<E> implements List<E> {
      * @return every index which the element occupies
      */
     public List<Integer> findAll(final E element){
-
         final List<Integer> indices = new ArrayList<>();
         int i = size;
         if(element == null){
@@ -457,19 +433,16 @@ public class SinglyLinkedList<E> implements List<E> {
             }
         }
         return EllieCollections.unmodifiableList(indices);
-
     }
 
     /*
      * A method to unlink and return the head.
      */
     private E unlinkHead(){
-
         final E removal = head.store;
         head = head.next;
         size--;
         return removal;
-
     }
 
     /**
@@ -477,9 +450,7 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public int size(){
-
         return size;
-
     }
 
     /**
@@ -487,9 +458,7 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public boolean isEmpty() {
-
         return head == null;
-
     }
 
     /**
@@ -497,7 +466,6 @@ public class SinglyLinkedList<E> implements List<E> {
      * (inclusive). Hints to garbage collection afterwards.
      */
     public void deleteRange(final int startPos, final int endPos){
-
         if(startPos < 1 || endPos < 1 || startPos > size || endPos > size)
             throw new IndexOutOfBoundsException(
                     "The given index is out of bounds."
@@ -512,7 +480,6 @@ public class SinglyLinkedList<E> implements List<E> {
             size -= (endPos - startPos + 1);
             System.gc();
         }
-
     }
 
     /**
@@ -522,7 +489,6 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public String toString() {
-
         final StringBuilder out = new StringBuilder("]");
         for (Link<E> n = head; n != null; n = n.next) {
             out.insert(0, n).insert(
@@ -530,7 +496,6 @@ public class SinglyLinkedList<E> implements List<E> {
             );
         }
         return out.insert(0, "[").toString();
-
     }
 
     /**
@@ -538,9 +503,7 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public String toStore() {
-
         return toString();
-
     }
 
     /**
@@ -548,7 +511,6 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public Object[] toArray() {
-
         Object[] array = new Object[size];
         int i = size - 1;
         for (Link<E> n = head; n != null; n = n.next) {
@@ -558,7 +520,6 @@ public class SinglyLinkedList<E> implements List<E> {
         size = 0;
         System.gc();
         return array;
-
     }
 
     /**
@@ -566,14 +527,12 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     @Override
     public int hashCode() {
-
         int hash = 1;
         for (Link<E> n = head; n != null; n = n.next) {
             hash = EllieCollections.HASH_CODE_CONST * hash +
                     (n.store != null ? n.hashCode() : 0);
         }
         return hash;
-
     }
 
     /**
@@ -582,7 +541,6 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     @SuppressWarnings("Unchecked")
     public boolean equals(final Object other) {
-
         if (this == other) return true;
         if (other == null) return false;
         if (!(other instanceof LinkedList)) return false;
@@ -596,7 +554,6 @@ public class SinglyLinkedList<E> implements List<E> {
             if (!n.equals(on)) return false;
         }
         return true;
-
     }
 
     /**
@@ -636,9 +593,7 @@ public class SinglyLinkedList<E> implements List<E> {
          */
         @Override
         public int hashCode(){
-
             return store != null? store.hashCode(): 0;
-
         }
 
         /**
@@ -650,15 +605,10 @@ public class SinglyLinkedList<E> implements List<E> {
         @Override
         @SuppressWarnings("Unchecked")
         public boolean equals(final Object other){
-
-            if(this == other){
-                return true;
-            }else if(!(other instanceof Link)){
-                return false;
-            }
+            if(this == other) return true;
+            else if(!(other instanceof Link)) return false;
             final Link<E> cast = (Link<E>) other;
             return this.store.equals(cast.store);
-
         }
 
         /**
@@ -668,9 +618,7 @@ public class SinglyLinkedList<E> implements List<E> {
          */
         @Override
         public String toString(){
-
             return (store != null)? store.toString(): "null";
-
         }
 
     }

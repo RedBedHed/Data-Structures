@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Array List
  *
  * <p>
- * This is a simplified List implementation!
+ * This is a simplified List implementation.
  *
  * @param <E> the type
  * @author Ellie Moore
@@ -39,10 +39,8 @@ public class ArrayList<E> implements List<E> {
      */
     @SuppressWarnings("Unchecked")
     public ArrayList() {
-
         internal = (E[]) new Object[ALLOCATION];
         size = 0;
-
     }
 
     /**
@@ -52,10 +50,8 @@ public class ArrayList<E> implements List<E> {
      * @param array the array to be converted.
      */
     public ArrayList(final E[] array){
-
         this();
         for(final E e: array) add(e);
-
     }
 
     /**
@@ -63,14 +59,12 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public E get(final int index) {
-
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(
                     "Argument must be a valid index"
             );
         }
         return internal[index];
-
     }
 
     /**
@@ -83,7 +77,6 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public E remove(int index) {
-
         if (index < 0 && index >= size) {
             throw new IndexOutOfBoundsException(
                     "Argument must be a valid index"
@@ -95,7 +88,6 @@ public class ArrayList<E> implements List<E> {
         );
         size--;
         return selection;
-
     }
 
     /**
@@ -111,14 +103,12 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public boolean remove(E input) {
-
         final int index = indexOf(input);
         if(index >= size || index < 0) return false;
         else {
             remove(index);
             return true;
         }
-
     }
 
     /**
@@ -129,7 +119,6 @@ public class ArrayList<E> implements List<E> {
      * @return whether or not the element was removed successfully
      */
     public boolean removeAll(E input){
-
         boolean flag = false;
         if(input == null){
             for(int i = 0; i < size; i++){
@@ -147,7 +136,6 @@ public class ArrayList<E> implements List<E> {
             }
         }
         return flag;
-
     }
 
     /**
@@ -155,7 +143,6 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public E set(final int index, final E input) {
-
         if (index < 0 && index >= size) {
             throw new IndexOutOfBoundsException(
                     "Argument must be a valid index"
@@ -164,7 +151,6 @@ public class ArrayList<E> implements List<E> {
         final E temp = internal[index];
         internal[index] = input;
         return temp;
-
     }
 
     /**
@@ -172,14 +158,12 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public boolean replace(final E candidate, final E input) {
-
         final int index = indexOf(candidate);
         if(index >= size || index < 0) return false;
         else {
             set(index, input);
             return true;
         }
-
     }
 
     /**
@@ -191,7 +175,6 @@ public class ArrayList<E> implements List<E> {
      * @return whether or not the element was replaced successfully
      */
     public boolean replaceAll(final E candidate, final E input){
-
         boolean flag = false;
         if(input == null){
             for(int i = 0; i < size; i++) {
@@ -210,7 +193,6 @@ public class ArrayList<E> implements List<E> {
             }
         }
         return flag;
-
     }
 
     /**
@@ -218,10 +200,8 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public ArrayList<E> add(E input) {
-
         add(size, input);
         return this;
-
     }
 
     /**
@@ -234,7 +214,6 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public void add(final int index, final E input) {
-
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException(
                     "Argument must be a valid index"
@@ -246,7 +225,6 @@ public class ArrayList<E> implements List<E> {
         );
         internal[index] = input;
         size++;
-
     }
 
     /*
@@ -254,13 +232,11 @@ public class ArrayList<E> implements List<E> {
      * internal Array to a new, larger Array.
      */
     private void grow() {
-
         if (size >= internal.length - 1) {
             internal = Arrays.copyOf(
                     internal, internal.length + ALLOCATION
             );
         }
-
     }
 
     /**
@@ -272,14 +248,12 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public int indexOf(final E input) {
-
         for (int i = 0; i < size; i++) {
             if (internal[i].equals(input)) {
                 return i;
             }
         }
         return -1;
-
     }
 
     /**
@@ -287,9 +261,7 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public int size() {
-
         return size;
-
     }
 
     /**
@@ -297,9 +269,7 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public boolean isEmpty() {
-
         return size == 0;
-
     }
 
     /**
@@ -307,7 +277,6 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public String toString() {
-
         StringBuilder out = new StringBuilder();
         out.append("[");
         for (int i = 0; i < size; i++) {
@@ -315,7 +284,6 @@ public class ArrayList<E> implements List<E> {
         }
         out.append("]");
         return out.toString();
-
     }
 
     /**
@@ -323,14 +291,12 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public String toStore() {
-
         StringBuilder out = new StringBuilder("[");
         for (int i = 0; i < internal.length; i++) {
             out.append(internal[i]).append((i < internal.length - 1) ? ", " : "");
         }
         out.append("]");
         return out.toString();
-
     }
 
     /**
@@ -339,7 +305,6 @@ public class ArrayList<E> implements List<E> {
     @SuppressWarnings("Unchecked")
     @Override
     public boolean equals(Object other) {
-
         if (this == other) return true;
         if(other == null) return false;
         if (!(other instanceof ArrayList)) return false;
@@ -351,7 +316,6 @@ public class ArrayList<E> implements List<E> {
             }
         }
         return true;
-
     }
 
     /**
@@ -359,14 +323,12 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public int hashCode() {
-
         int hash = 1;
         for (E e : internal) {
             hash = EllieCollections.HASH_CODE_CONST * hash +
                     (e != null ? e.hashCode() : 0);
         }
         return hash;
-
     }
 
     /**
@@ -374,13 +336,11 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public Object[] toArray() {
-
         Object[] out = new Object[size];
         System.arraycopy(internal, 0, out, 0, size);
         internal = (E[]) new Object[ALLOCATION];
         size = 0;
         return out;
-
     }
 
 }

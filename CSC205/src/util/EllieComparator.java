@@ -20,10 +20,8 @@ public interface EllieComparator<E> {
      * @return an integer value based on the comparison (1 if >, -1 if <, 0 if ==)
      */
     default int compare(E e, E ex) {
-
-        return (e != null && ex != null)?
-                Integer.compare(e.hashCode(), ex.hashCode()): -1;
-
+        if(e != null && ex != null) return Integer.compare(e.hashCode(), ex.hashCode());
+        return e == null? (ex == null? 0: -1): 1;
     }
 
 }

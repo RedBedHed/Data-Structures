@@ -3,7 +3,8 @@ package util;
 public interface Map<K,V> extends EllieCollection {
 
     /**
-     * A method to put a value into the tree map.
+     * A method to put a value into the {@code Map} with
+     * the given key.
      *
      * @param k the key
      * @param v the value
@@ -11,7 +12,7 @@ public interface Map<K,V> extends EllieCollection {
     void put(K k, V v);
 
     /**
-     * A method to get a value using its key
+     * A method to get a value using the corresponding key.
      *
      * @param k the key
      * @return the value stored with the given key.
@@ -19,7 +20,7 @@ public interface Map<K,V> extends EllieCollection {
     V get(K k);
 
     /**
-     * A method to remove a value using its key.
+     * A method to remove a value using the corresponding key.
      *
      * @param k the key
      * @return the value stored with the given key.

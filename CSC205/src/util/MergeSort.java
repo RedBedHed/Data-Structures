@@ -21,9 +21,9 @@ public final class MergeSort {
      */
     @SuppressWarnings("Unchecked")
     protected static <E> void sort(final E[] array,
-                                      int left,
-                                      int right,
-                                      final EllieComparator<E> c) {
+                                   int left,
+                                   int right,
+                                   final EllieComparator<E> c) {
 
         if (left < right) {
 
@@ -42,39 +42,41 @@ public final class MergeSort {
 
             // If the mid is less than or equal to the next element over,
             // there is no reason to merge.
-            if (c.compare(array[mid], array[mid + 1]) <= 0) return;
+            if (c.compare(array[mid], array[mid + 1]) > 0) {
 
-            // If the element at left is less than the element at mid + 1,
-            // or if the element at mid is less than the element at right,
-            // use binary search to narrow the interval before merging.
-            if (c.compare(array[left], array[mid + 1]) < 0)
-                left = binarySearch(array, left, mid, mid + 1, c);
-            if (c.compare(array[mid], array[right]) < 0)
-                right = binarySearch(array, mid + 1, right, mid, c);
+                // If the element at left is less than the element at mid + 1,
+                // or if the element at mid is less than the element at right,
+                // use binary search to narrow the interval before merging.
+                if (c.compare(array[left], array[mid + 1]) < 0)
+                    left = binarySearch(array, left, mid, mid + 1, c);
+                if (c.compare(array[mid], array[right]) < 0)
+                    right = binarySearch(array, mid + 1, right, mid, c);
 
-            // Initialize temporary storage.
-            E[] lt = (E[]) new Object[mid + 1 - left];
-            E[] rt = (E[]) new Object[right - mid];
+                // Initialize temporary storage.
+                E[] lt = (E[]) new Object[mid + 1 - left];
+                E[] rt = (E[]) new Object[right - mid];
 
-            // Fill left and right temporary arrays.
-            for (int i = 0; i < lt.length; i++)
-                lt[i] = array[i + left];
-            for (int j = 0; j < rt.length; j++)
-                rt[j] = array[j + mid + 1];
+                // Fill left and right temporary arrays.
+                for (int i = 0; i < lt.length; i++)
+                    lt[i] = array[i + left];
+                for (int j = 0; j < rt.length; j++)
+                    rt[j] = array[j + mid + 1];
 
-            // merge.
-            int i = 0, j = 0, k = left;
-            while (i < lt.length && j < rt.length) {
-                if (c.compare(lt[i], rt[j]) < 0)
-                    array[k] = lt[i++];
-                else array[k] = rt[j++];
-                k++;
+                // merge.
+                int i = 0, j = 0, k = left;
+                while (i < lt.length && j < rt.length) {
+                    if (c.compare(lt[i], rt[j]) < 0)
+                        array[k] = lt[i++];
+                    else array[k] = rt[j++];
+                    k++;
+                }
+
+                // add any remaining elements to the end of the
+                // interval.
+                while (i < lt.length) array[k++] = lt[i++];
+                while (j < rt.length) array[k++] = rt[j++];
+
             }
-
-            // add any remaining elements to the end of the
-            // interval.
-            while (i < lt.length) array[k++] = lt[i++];
-            while (j < rt.length) array[k++] = rt[j++];
 
         }
 
@@ -98,9 +100,8 @@ public final class MergeSort {
                                         final int can,
                                         final EllieComparator<E> c) {
 
-        int mid;
         while ((end - beg) > 1) {
-            mid = (beg + end) >>> 1;
+            int mid = (beg + end) >>> 1;
             final int cmp = c.compare(array[can], array[mid]);
             if (cmp < 0) end = mid;
             else if (cmp > 0) beg = mid;

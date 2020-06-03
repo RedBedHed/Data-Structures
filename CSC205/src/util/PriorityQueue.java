@@ -1,10 +1,10 @@
 package util;
 
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Priority Queue
+ *
  * <p>
  * This is a priority queue implemented with a Max Heap. Insertion and
  * deletion operations are both O(log(n)).

@@ -38,12 +38,11 @@ public final class InsertionSort {
                 array[j + 1] = store;
             }
 
-        } else {
+        } else { // Pair insertion sort.
 
             // Skip elements that are in ascending order.
-            do {
-                if (left >= right) return;
-            } while (c.compare(array[++left], array[left - 1]) >= 0);
+            do if (left >= right) return;
+            while (c.compare(array[++left], array[left - 1]) >= 0);
 
             // Pair insertion sort. Requires prior partitioning.
             // Uses the sub-array at left as a sentinel.

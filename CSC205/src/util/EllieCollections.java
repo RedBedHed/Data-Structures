@@ -15,7 +15,7 @@ import java.util.Random;
  * context of non-leftmost partitioning. For medium-sized arrays, Partition sorting
  * is used. This algorithm is optimized to skip over equal or in-order elements at
  * each level of recursion. Finally, for large arrays, Merge sort is used. This
- * algorithm relies on Partitioning to sort each "run" as quickly as possible. Merge
+ * algorithm relies on partitioning to sort each "run" as quickly as possible. Merge
  * sorting also makes use of a binary search algorithm in order to find the optimal
  * indices at which to merge the given runs.
  *
@@ -201,8 +201,10 @@ class test {
         for (int k = 0; k < 100000; k++) {
             if (k % 1000 == 0) System.out.print("#");
             ArrayList<Integer> l = new ArrayList<>();
+            int q = 1;
+            int d = 100;
             for (int i = 1000; i > 0; i--)
-                l.add(rgen.nextInt(100));
+                l.add((q++ %d == 0)? q = 1: q);
             //System.out.println(l);
             //Object[] arr = l.toArray();
             EllieCollections.sort(l);
