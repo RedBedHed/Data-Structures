@@ -23,9 +23,7 @@ public class LinkedStack<E> implements Stack<E> {
      * internal {@code Deque}
      */
     public LinkedStack() {
-
         internal = new LinkedDeque<>();
-
     }
 
     /**
@@ -39,9 +37,7 @@ public class LinkedStack<E> implements Stack<E> {
      */
     @Override
     public void push(final E element) {
-
         internal.insertOnFront(element);
-
     }
 
     /**
@@ -57,9 +53,7 @@ public class LinkedStack<E> implements Stack<E> {
      */
     @Override
     public E pop() {
-
         return internal.delete();
-
     }
 
     /**
@@ -67,9 +61,7 @@ public class LinkedStack<E> implements Stack<E> {
      */
     @Override
     public E peek() {
-
         return null;
-
     }
 
     /**
@@ -77,9 +69,7 @@ public class LinkedStack<E> implements Stack<E> {
      */
     @Override
     public int size() {
-
         return internal.size();
-
     }
 
     /**
@@ -87,9 +77,7 @@ public class LinkedStack<E> implements Stack<E> {
      */
     @Override
     public boolean isEmpty() {
-
         return internal.isEmpty();
-
     }
 
     /**
@@ -97,9 +85,7 @@ public class LinkedStack<E> implements Stack<E> {
      */
     @Override
     public String toString() {
-
         return internal.toString();
-
     }
 
     /**
@@ -107,9 +93,7 @@ public class LinkedStack<E> implements Stack<E> {
      */
     @Override
     public String toStore() {
-
         return internal.toStore();
-
     }
 
     /**
@@ -117,9 +101,7 @@ public class LinkedStack<E> implements Stack<E> {
      */
     @Override
     public int hashCode() {
-
         return internal.hashCode();
-
     }
 
     /**
@@ -128,15 +110,10 @@ public class LinkedStack<E> implements Stack<E> {
     @Override
     @SuppressWarnings("Unchecked")
     public boolean equals(Object other) {
-
-        if (this == other) {
-            return true;
-        } else if (!(other instanceof LinkedStack)) {
-            return false;
-        }
+        if (this == other) return true;
+        else if (!(other instanceof LinkedStack)) return false;
         LinkedStack<E> cast = (LinkedStack<E>) other;
         return internal.equals(cast.internal);
-
     }
 
 }

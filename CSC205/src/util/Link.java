@@ -4,7 +4,7 @@ package util;
  * Link
  *
  * <p>
- * The basic unit of a Linked Data Structure.
+ * The basic unit of a Doubly-Linked Data-Structure.
  *
  * @param <E> the type
  */
@@ -44,12 +44,10 @@ public final class Link<E> {
     @Override
     @SuppressWarnings("Unchecked")
     public boolean equals(Object other){
-
         if(this == other) return true;
         else if(!(other instanceof Link)) return false;
         final Link<E> cast = (Link<E>) other;
         return this.store.equals(cast.store);
-
     }
 
     /**
@@ -59,9 +57,7 @@ public final class Link<E> {
      */
     @Override
     public String toString(){
-
         return (store != null)? store.toString(): "null";
-
     }
 
 }

@@ -41,13 +41,11 @@ public class LinkedDeque<E> implements Deque<E> {
      * variable to zero.
      */
     public LinkedDeque() {
-
         head = new Link<>();
         tail = new Link<>();
         head.next = tail;
         tail.prev = head;
         size = 0;
-
     }
 
     /**
@@ -63,14 +61,12 @@ public class LinkedDeque<E> implements Deque<E> {
      * @param element the element to be inserted.
      */
     public void insertOnFront(final E element) {
-
         Link<E> replacement = new Link<>();
         head.store = element;
         head.prev = replacement;
         replacement.next = head;
         head = replacement;
         size++;
-
     }
 
     /**
@@ -89,14 +85,12 @@ public class LinkedDeque<E> implements Deque<E> {
      */
     @Override
     public void insert(final E element) {
-
         Link<E> replacement = new Link<>();
         tail.store = element;
         tail.next = replacement;
         replacement.prev = tail;
         tail = replacement;
         size++;
-
     }
 
     /**
@@ -111,14 +105,12 @@ public class LinkedDeque<E> implements Deque<E> {
      */
     @Override
     public E delete() {
-
         if (isEmpty()) return null;
         size--;
         final E removal = head.next.store;
         head = head.next;
         head.prev = null;
         return removal;
-
     }
 
     /**
@@ -134,14 +126,12 @@ public class LinkedDeque<E> implements Deque<E> {
      * @return the element at the back of the {@code Deque}
      */
     public E deleteFromBack() {
-
         if (isEmpty()) return null;
         size--;
         final E removal = tail.prev.store;
         tail = tail.prev;
         tail.next = null;
         return removal;
-
     }
 
     /**
@@ -149,9 +139,7 @@ public class LinkedDeque<E> implements Deque<E> {
      */
     @Override
     public E peek() {
-
         return head.next.store;
-
     }
 
     /**
@@ -160,9 +148,7 @@ public class LinkedDeque<E> implements Deque<E> {
      * @return the element at the back of the Deque
      */
     public E peekFromBack() {
-
         return tail.prev.store;
-
     }
 
     /**
@@ -170,9 +156,7 @@ public class LinkedDeque<E> implements Deque<E> {
      */
     @Override
     public int size() {
-
         return size;
-
     }
 
     /**
@@ -180,9 +164,7 @@ public class LinkedDeque<E> implements Deque<E> {
      */
     @Override
     public boolean isEmpty() {
-
         return size == 0;
-
     }
 
     /**
@@ -190,7 +172,6 @@ public class LinkedDeque<E> implements Deque<E> {
      */
     @Override
     public String toString() {
-
         final StringBuilder out = new StringBuilder("[");
         int i = 0;
         for (Link<E> link = head.next; link.next != null; link = link.next) {
@@ -200,7 +181,6 @@ public class LinkedDeque<E> implements Deque<E> {
             }
         }
         return out.append("]").toString();
-
     }
 
     /**
@@ -208,7 +188,6 @@ public class LinkedDeque<E> implements Deque<E> {
      */
     @Override
     public String toStore() {
-
         final StringBuilder out = new StringBuilder("[");
         int i = 0;
         for (Link<E> link = head; link != null; link = link.next) {
@@ -218,7 +197,6 @@ public class LinkedDeque<E> implements Deque<E> {
             }
         }
         return out.append("]").toString();
-
     }
 
 
@@ -227,14 +205,12 @@ public class LinkedDeque<E> implements Deque<E> {
      */
     @Override
     public int hashCode() {
-
         int hash = 1;
         for (Link<E> link = head.next; link.next != null; link = link.next) {
             hash = EllieCollections.HASH_CODE_CONST * hash +
                     (link.store != null ? link.hashCode() : 0);
         }
         return hash;
-
     }
 
     /**
@@ -243,7 +219,6 @@ public class LinkedDeque<E> implements Deque<E> {
     @Override
     @SuppressWarnings("Unchecked")
     public boolean equals(Object other) {
-
         if (this == other) return true;
         else if (!(other instanceof LinkedDeque)) return false;
         LinkedDeque<E> cast = (LinkedDeque<E>) other;
@@ -254,7 +229,6 @@ public class LinkedDeque<E> implements Deque<E> {
             if (!link.equals(otherLink)) return false;
         }
         return true;
-
     }
 
 }

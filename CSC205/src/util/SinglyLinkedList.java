@@ -560,7 +560,7 @@ public class SinglyLinkedList<E> implements List<E> {
      * Link
      *
      * <p>
-     * The basic unit of a singly-linked data structure.
+     * The basic unit of a Singly-Linked Data-Structure.
      *
      * @author Ellie Moore
      * @version 04.09.2020

@@ -47,12 +47,10 @@ public class ArrayDeque<E> implements Deque<E> {
      */
     @SuppressWarnings("Unchecked")
     public ArrayDeque() {
-
         internal = (E[]) new Object[INTERNAL_ALLOCATION];
         back = internal.length;
         front = 0;
         size = 0;
-
     }
 
     /**
@@ -71,14 +69,10 @@ public class ArrayDeque<E> implements Deque<E> {
      * @see #grow()
      */
     public void insertOnFront(final E input) {
-
         grow();
         size++;
         internal[front++] = input;
-        if (front >= internal.length) {
-            front = 0;
-        }
-
+        if (front >= internal.length) front = 0;
     }
 
     /**
@@ -94,15 +88,10 @@ public class ArrayDeque<E> implements Deque<E> {
      * @return the {@code Element} at the front of the {@code Deque}
      */
     public E delete() {
-
-        if (isEmpty()) {
-            return null;
-        } else if (front <= 0) {
-            front = internal.length;
-        }
+        if (isEmpty()) return null;
+        else if (front <= 0) front = internal.length;
         size--;
         return internal[--front];
-
     }
 
     /**
@@ -121,14 +110,10 @@ public class ArrayDeque<E> implements Deque<E> {
      * @see #grow()
      */
     public void insert(final E input) {
-
         grow();
         size++;
         internal[--back] = input;
-        if (back <= 0) {
-            back = internal.length;
-        }
-
+        if (back <= 0) back = internal.length;
     }
 
     /**
@@ -144,15 +129,10 @@ public class ArrayDeque<E> implements Deque<E> {
      * @return the {@code Element} at the back of the {@code Deque}
      */
     public E deleteFromBack() {
-
-        if (isEmpty()) {
-            return null;
-        } else if (back >= internal.length) {
-            back = 0;
-        }
+        if (isEmpty()) return null;
+        else if (back >= internal.length) back = 0;
         size--;
         return internal[back++];
-
     }
 
     /**
@@ -167,23 +147,19 @@ public class ArrayDeque<E> implements Deque<E> {
      */
     @SuppressWarnings("Unchecked")
     private void grow() {
-
         if (size >= internal.length - 1) {
             final E[] copy = (E[]) new String[internal.length + INTERNAL_ALLOCATION];
             int index = back;
             int secondaryIndex = 0;
             for (int i = 0; i < size; i++) {
-                if (index < internal.length) {
+                if (index < internal.length)
                     copy[index + INTERNAL_ALLOCATION] = internal[index++];
-                } else {
-                    copy[secondaryIndex] = internal[secondaryIndex++];
-                }
+                else copy[secondaryIndex] = internal[secondaryIndex++];
             }
             back += INTERNAL_ALLOCATION;
             front = (secondaryIndex != 0) ? secondaryIndex : index + INTERNAL_ALLOCATION;
             internal = copy;
         }
-
     }
 
     /**
@@ -193,18 +169,14 @@ public class ArrayDeque<E> implements Deque<E> {
      * @return the element at the back of the {@code Deque}
      */
     public E peekFromBack() {
-
         return internal[back];
-
     }
 
     /**
      * @inheritDoc
      */
     public E peek() {
-
         return internal[front - 1];
-
     }
 
     /**
@@ -212,9 +184,7 @@ public class ArrayDeque<E> implements Deque<E> {
      */
     @Override
     public boolean isEmpty() {
-
         return size <= 0;
-
     }
 
     /**
@@ -222,9 +192,7 @@ public class ArrayDeque<E> implements Deque<E> {
      */
     @Override
     public int size() {
-
         return size;
-
     }
 
     //public int getFront(){return front;}
@@ -235,7 +203,6 @@ public class ArrayDeque<E> implements Deque<E> {
      */
     @Override
     public String toString() {
-
         int index = back;
         StringBuilder out = new StringBuilder("[");
         for (int i = 0; i < size; i++) {
@@ -246,7 +213,6 @@ public class ArrayDeque<E> implements Deque<E> {
         }
         out.append("]");
         return out.toString();
-
     }
 
     /**
@@ -254,14 +220,12 @@ public class ArrayDeque<E> implements Deque<E> {
      */
     @Override
     public String toStore() {
-
         StringBuilder out = new StringBuilder("[");
         for (int i = 0; i < internal.length; i++) {
             out.append(internal[i]).append((i < internal.length - 1) ? ", " : "");
         }
         out.append("]");
         return out.toString();
-
     }
 
     /**
@@ -270,23 +234,15 @@ public class ArrayDeque<E> implements Deque<E> {
     @SuppressWarnings("Unchecked")
     @Override
     public boolean equals(Object other) {
-
-        if (this == other) {
-            return true;
-        } else if (!(other instanceof ArrayDeque)) {
-            return false;
-        }
+        if (this == other) return true;
+        else if (!(other instanceof ArrayDeque)) return false;
         ArrayDeque<E> otherElement = (ArrayDeque<E>) other;
-        if (otherElement.size != this.size) {
-            return false;
-        }
+        if (otherElement.size != this.size) return false;
         for (int i = 0; i < internal.length; i++) {
-            if (!internal[i].equals(otherElement.internal[i])) {
+            if (!internal[i].equals(otherElement.internal[i]))
                 return false;
-            }
         }
         return true;
-
     }
 
     /**
@@ -294,14 +250,12 @@ public class ArrayDeque<E> implements Deque<E> {
      */
     @Override
     public int hashCode() {
-
         int hash = 1;
         for (E e : internal) {
             hash = EllieCollections.HASH_CODE_CONST * hash +
                     (e != null ? e.hashCode() : 0);
         }
         return hash;
-
     }
 
 }

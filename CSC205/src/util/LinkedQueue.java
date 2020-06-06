@@ -23,9 +23,7 @@ public class LinkedQueue<E> implements Queue<E> {
      * initializes the internal {@code Deque}.
      */
     public LinkedQueue() {
-
         internal = new LinkedDeque<>();
-
     }
 
     /**
@@ -39,9 +37,7 @@ public class LinkedQueue<E> implements Queue<E> {
      */
     @Override
     public void insert(final E element) {
-
         internal.insert(element);
-
     }
 
     /**
@@ -57,9 +53,7 @@ public class LinkedQueue<E> implements Queue<E> {
      */
     @Override
     public E delete() {
-
         return internal.delete();
-
     }
 
     /**
@@ -67,9 +61,7 @@ public class LinkedQueue<E> implements Queue<E> {
      */
     @Override
     public E peek() {
-
         return internal.peek();
-
     }
 
     /**
@@ -77,9 +69,7 @@ public class LinkedQueue<E> implements Queue<E> {
      */
     @Override
     public int size() {
-
         return internal.size();
-
     }
 
     /**
@@ -87,9 +77,7 @@ public class LinkedQueue<E> implements Queue<E> {
      */
     @Override
     public boolean isEmpty() {
-
         return internal.isEmpty();
-
     }
 
     /**
@@ -105,9 +93,7 @@ public class LinkedQueue<E> implements Queue<E> {
      */
     @Override
     public String toStore() {
-
         return internal.toStore();
-
     }
 
     /**
@@ -115,9 +101,7 @@ public class LinkedQueue<E> implements Queue<E> {
      */
     @Override
     public int hashCode() {
-
         return internal.hashCode();
-
     }
 
     /**
@@ -125,15 +109,10 @@ public class LinkedQueue<E> implements Queue<E> {
      */
     @Override
     public boolean equals(Object other) {
-
-        if (this == other) {
-            return true;
-        } else if (!(other instanceof LinkedQueue)) {
-            return false;
-        }
+        if (this == other) return true;
+        else if (!(other instanceof LinkedQueue)) return false;
         LinkedQueue<E> cast = (LinkedQueue<E>) other;
         return internal.equals(cast.internal);
-
     }
 
 }

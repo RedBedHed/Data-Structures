@@ -249,9 +249,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public int indexOf(final E input) {
         for (int i = 0; i < size; i++) {
-            if (internal[i].equals(input)) {
-                return i;
-            }
+            if (internal[i].equals(input)) return i;
         }
         return -1;
     }
@@ -311,9 +309,8 @@ public class ArrayList<E> implements List<E> {
         ArrayList<E> otherElement = (ArrayList<E>) other;
         if (otherElement.size != this.size) return false;
         for (int i = 0; i < size; i++) {
-            if (!internal[i].equals(otherElement.internal[i])) {
+            if (!internal[i].equals(otherElement.internal[i]))
                 return false;
-            }
         }
         return true;
     }

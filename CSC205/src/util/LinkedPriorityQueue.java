@@ -1,7 +1,5 @@
 package util;
 
-import java.util.Random;
-
 /**
  * Linked Priority Queue
  *
@@ -35,9 +33,7 @@ public class LinkedPriorityQueue<E> implements Queue<E> {
      */
     @Override
     public void insert(final E e){
-
         internal.add(0, new Element<E>(0, e));
-
     }
 
     /**
@@ -48,9 +44,7 @@ public class LinkedPriorityQueue<E> implements Queue<E> {
      * @param priority the priority associated with the given element
      */
     public void insert(final E e, final int priority) {
-
         internal.add(binarySearch(priority), new Element<>(priority, e));
-
     }
 
     /**

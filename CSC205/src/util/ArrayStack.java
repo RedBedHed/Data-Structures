@@ -22,9 +22,7 @@ public class ArrayStack<E> implements Stack<E> {
      * A public constructor to instantiate a new {@code ArrayStack Object}.
      */
     public ArrayStack() {
-
         internal = new ArrayDeque<>();
-
     }
 
     /**
@@ -39,9 +37,7 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @Override
     public void push(final E input) {
-
         internal.insertOnFront(input);
-
     }
 
     /**
@@ -56,9 +52,7 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @Override
     public E pop() {
-
         return internal.delete();
-
     }
 
     /**
@@ -68,9 +62,7 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @Override
     public E peek() {
-
         return internal.peek();
-
     }
 
     /**
@@ -78,9 +70,7 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @Override
     public int size() {
-
         return internal.size();
-
     }
 
     /**
@@ -88,9 +78,7 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @Override
     public boolean isEmpty() {
-
         return internal.isEmpty();
-
     }
 
     /**
@@ -98,9 +86,7 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @Override
     public String toString() {
-
         return internal.toString();
-
     }
 
     /**
@@ -108,9 +94,7 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @Override
     public String toStore() {
-
         return internal.toStore();
-
     }
 
     /**
@@ -118,9 +102,7 @@ public class ArrayStack<E> implements Stack<E> {
      */
     @Override
     public int hashCode() {
-
         return internal.hashCode();
-
     }
 
     /**
@@ -129,15 +111,10 @@ public class ArrayStack<E> implements Stack<E> {
     @Override
     @SuppressWarnings("Unchecked")
     public boolean equals(final Object other) {
-
-        if (other == this) {
-            return true;
-        } else if (!(other instanceof ArrayStack)) {
-            return false;
-        }
+        if (other == this) return true;
+        else if (!(other instanceof ArrayStack)) return false;
         ArrayStack<E> otherArrayStack = (ArrayStack<E>) other;
         return internal.equals(otherArrayStack.internal);
-
     }
 
 }

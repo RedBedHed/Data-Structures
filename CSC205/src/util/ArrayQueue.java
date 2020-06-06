@@ -4,7 +4,7 @@ package util;
  * Array Queue
  *
  * <p>This is a {@code Queue} implementation that makes use of an
- * internal {@code EllieDeque}.
+ * internal {@code ArrayDeque}.
  *
  * @param <E> the type
  * @author Ellie Moore
@@ -22,9 +22,7 @@ public class ArrayQueue<E> implements Queue<E> {
      * A public constructor to instantiate a new {@code ArrayQueue Object}.
      */
     public ArrayQueue() {
-
         internal = new ArrayDeque<>();
-
     }
 
     /**
@@ -39,9 +37,7 @@ public class ArrayQueue<E> implements Queue<E> {
      */
     @Override
     public void insert(final E input) {
-
         internal.insert(input);
-
     }
 
     /**
@@ -56,22 +52,19 @@ public class ArrayQueue<E> implements Queue<E> {
      */
     @Override
     public E delete() {
-
         return internal.delete();
-
     }
 
     /**
-     * @return the {@code Element} at the front of the {@code Queue}(non-removal)
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @return the {@code Element} at the front of the {@code Queue}
      * @see ArrayDeque#peek()
      * @see java.util.Queue#peek()
      */
     @Override
     public E peek() {
-
         return internal.peek();
-
     }
 
     /**
@@ -79,9 +72,7 @@ public class ArrayQueue<E> implements Queue<E> {
      */
     @Override
     public int size() {
-
         return internal.size();
-
     }
 
     /**
@@ -89,9 +80,7 @@ public class ArrayQueue<E> implements Queue<E> {
      */
     @Override
     public boolean isEmpty() {
-
         return internal.isEmpty();
-
     }
 
     /**
@@ -99,9 +88,7 @@ public class ArrayQueue<E> implements Queue<E> {
      */
     @Override
     public String toString() {
-
         return internal.toString();
-
     }
 
     /**
@@ -109,9 +96,7 @@ public class ArrayQueue<E> implements Queue<E> {
      */
     @Override
     public String toStore() {
-
         return internal.toStore();
-
     }
 
     /**
@@ -119,9 +104,7 @@ public class ArrayQueue<E> implements Queue<E> {
      */
     @Override
     public int hashCode() {
-
         return internal.hashCode();
-
     }
 
     /**
@@ -130,15 +113,10 @@ public class ArrayQueue<E> implements Queue<E> {
     @Override
     @SuppressWarnings("Unchecked")
     public boolean equals(final Object other) {
-
-        if (other == this) {
-            return true;
-        } else if (!(other instanceof ArrayQueue)) {
-            return false;
-        }
+        if (other == this) return true;
+        else if (!(other instanceof ArrayQueue)) return false;
         ArrayQueue<E> otherEllieStack = (ArrayQueue<E>) other;
         return internal.equals(otherEllieStack.internal);
-
     }
 
 }
