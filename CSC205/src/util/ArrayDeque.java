@@ -170,8 +170,7 @@ public class ArrayDeque<E> implements Deque<E> {
      */
     public E peekFromBack() {
         if(back < internal.length) return internal[back];
-        else if(back == internal.length) return internal[back - 1];
-        else throw new IndexOutOfBoundsException();
+        else return internal[back - 1];
     }
 
     /**
@@ -179,8 +178,7 @@ public class ArrayDeque<E> implements Deque<E> {
      */
     public E peek() {
         if(front > 0) return internal[front - 1];
-        else if(front == 0) return internal[0];
-        else throw new IndexOutOfBoundsException();
+        else return internal[0];
     }
 
     /**
