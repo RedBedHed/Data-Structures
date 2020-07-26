@@ -169,14 +169,18 @@ public class ArrayDeque<E> implements Deque<E> {
      * @return the element at the back of the {@code Deque}
      */
     public E peekFromBack() {
-        return internal[back];
+        if(back < internal.length) return internal[back];
+        else if(back == internal.length) return internal[back - 1];
+        else throw new IndexOutOfBoundsException();
     }
 
     /**
      * @inheritDoc
      */
     public E peek() {
-        return internal[front - 1];
+        if(front > 0) return internal[front - 1];
+        else if(front == 0) return internal[0];
+        else throw new IndexOutOfBoundsException();
     }
 
     /**
