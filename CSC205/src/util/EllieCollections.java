@@ -190,3 +190,49 @@ public final class EllieCollections {
     }
 
 }
+
+class test {
+
+    public static void main(String[] args) {
+
+        Random rgen = new Random();
+        System.out.println("____________________________________________________________________________________________________");
+        final long start = System.currentTimeMillis();
+        for (int k = 0; k < 100000; k++) {
+            if (k % 1000 == 0) System.out.print("#");
+            ArrayList<Integer> l = new ArrayList<>();
+            int q = 1;
+            int d = 100;
+            for (int i = 1000; i > 0; i--)
+                l.add((q++ %d == 0)? q = 1: q);
+            //System.out.println(l);
+            //Object[] arr = l.toArray();
+            EllieCollections.sort(l);
+            test(l.toArray(), k);
+        }
+        final long end = System.currentTimeMillis();
+
+        System.out.println("\n:) " + (end - start));
+
+    }
+
+    public static <E> void test(E[] arr, int num) {
+
+        EllieComparator<E> comp = new EllieComparator<>() {
+            @Override
+            public int compare(E e, E ex) {
+                return EllieComparator.super.compare(e, ex);
+            }
+        };
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (comp.compare(arr[i], arr[i + 1]) > 0) {
+                //System.out.println(Arrays.toString(arr));
+                System.out.println(num);
+                System.out.println(":(");
+                break;
+            }
+        }
+        //System.out.println(Arrays.toString(arr));
+
+    }
+}

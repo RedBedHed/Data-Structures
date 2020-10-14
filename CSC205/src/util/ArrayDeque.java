@@ -20,8 +20,8 @@ public class ArrayDeque<E> implements Deque<E> {
 
     /**
      * The {@code internal Array} used to store the {@code Object}'s data.
-     * The capacity of the {@code Deque Object} is (at all times) the
-     * length of this {@code Array}.
+     * The capacity of the {@code Deque Object} is the length of this
+     * {@code Array}.
      */
     private E[] internal;
 
@@ -54,20 +54,12 @@ public class ArrayDeque<E> implements Deque<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>Since the {@code internal Array} is a circular {@code Array}, there is
-     * no need for any shifting of its contents. Thus, the method simply mutates
-     * the {@code internal Array} at the {@code front} index and increments this
-     * index. If (upon returning to its native territory) the {@code front}
-     * index reaches the size of the {@code internal Array}, it is set to zero
-     * and allowed re-entry into its native territory. This method also grows
-     * the {@code internal Array} as needed, and increments the {@code size}
-     * each time it is called.
+     * @inheritDoc
      *
      * @param input {@code Element}
      * @see #grow()
      */
+    @Override
     public void insertOnFront(final E input) {
         grow();
         size++;
@@ -76,17 +68,13 @@ public class ArrayDeque<E> implements Deque<E> {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      *
-     * <p>Since the {@code internal Array} is circular, no shifting is
-     * involved. If the {@code Deque} is empty, the method returns null. If the
-     * {@code front} variable decreases to zero it is set to the length of the
-     * {@code internal Array} and allowed to cross over into the {@code back}
-     * variable's territory. This method decrements the {@code size} and the
-     * {@code front} variable each time it is called.
+     * <p>If the {@code Deque} is empty, this method returns null.
      *
      * @return the {@code Element} at the front of the {@code Deque}
      */
+    @Override
     public E delete() {
         if (isEmpty()) return null;
         else if (front <= 0) front = internal.length;
@@ -95,20 +83,12 @@ public class ArrayDeque<E> implements Deque<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>Since the {@code internal Array} is circular, no shifting is involved.
-     * Instead, this method decrements the {@code back} index and mutates the
-     * {@code internal Array} at this index. If (upon returning to its native
-     * territory) the {@code back} variable reaches a value of zero, then it
-     * is set to the length of the {@code internal Array} and allowed to re-enter
-     * into it's native territory. The variable {@code size} is incremented each
-     * time this method is called, and the {@code internal Array} is allowed to
-     * grow when necessary.
+     * @inheritDoc
      *
      * @param input {@code Element}
      * @see #grow()
      */
+    @Override
     public void insert(final E input) {
         grow();
         size++;
@@ -119,28 +99,28 @@ public class ArrayDeque<E> implements Deque<E> {
     /**
      * {@inheritDoc}
      *
-     * <p>Since the {@code internal Array} is circular, no shifting is involved. If
-     * the {@code Deque} is empty, the method returns null. If the {@code back}
-     * variable reaches the length of the {@code internal} array, it is set to zero
-     * and allowed to enter the {@code front} variable's territory. This method
-     * decrements the {@code size} and increments the {@code back} variable each
-     * time it is called.
+     * <p>If the {@code Deque} is empty, this method returns null.
      *
      * @return the {@code Element} at the back of the {@code Deque}
      */
+    @Override
     public E deleteFromBack() {
+        // If the back
+        // variable reaches the length of the internal array, it is set to zero
+        // and allowed to enter the front variable's territory. This method
+        // decrements the size and increments the back variable each
+        // time it is called.
         if (isEmpty()) return null;
         else if (back >= internal.length) back = 0;
         size--;
         return internal[back++];
     }
 
-    /**
-     * A void method that gives the illusion of dynamic behavior.
-     * If {@code size} equals the length of the {@code internal Array}, then this
-     * method performs a manual copy to a larger circle-{@code Array}. The method
-     * then assigns the new {@code Array}'s reference to the {@code internal}
-     * pointer and leaves the old {@code Array} for garbage collection.
+    /*
+     * If size equals the length of the internal Array, then this
+     * method performs a manual copy to a larger Array. This method
+     * then assigns the new Array's reference to the internal
+     * pointer and leaves the old Array for garbage collection.
      *
      * @see System#arraycopy(Object, int, Object, int, int)
      * @see java.util.Arrays#copyOf(Object[], int)
@@ -168,6 +148,7 @@ public class ArrayDeque<E> implements Deque<E> {
      *
      * @return the element at the back of the {@code Deque}
      */
+    @Override
     public E peekFromBack() {
         if(back < internal.length) return internal[back];
         else return internal[back - 1];
@@ -176,6 +157,7 @@ public class ArrayDeque<E> implements Deque<E> {
     /**
      * @inheritDoc
      */
+    @Override
     public E peek() {
         if(front > 0) return internal[front - 1];
         else return internal[0];
@@ -196,9 +178,6 @@ public class ArrayDeque<E> implements Deque<E> {
     public int size() {
         return size;
     }
-
-    //public int getFront(){return front;}
-    //public int getBack(){return back;}
 
     /**
      * @inheritDoc
@@ -240,7 +219,8 @@ public class ArrayDeque<E> implements Deque<E> {
         else if (!(other instanceof ArrayDeque)) return false;
         ArrayDeque<E> otherElement = (ArrayDeque<E>) other;
         if (otherElement.size != this.size) return false;
-        for (int i = 0; i < internal.length; i++) {
+        for (int i = back, j = (back + size); i < j; i++) {
+            if(i >= internal.length) {j -= i; i = 0;}
             if (!internal[i].equals(otherElement.internal[i]))
                 return false;
         }

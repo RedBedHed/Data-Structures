@@ -26,12 +26,7 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>Since internal storage is handled by a {@Deque object},
-     * no shifting is involved.
-     *
-     * @param input {@code Element}
+     * @inheritDoc
      * @see ArrayDeque#insert(E)
      * @see java.util.Queue#add(E)
      */
@@ -41,11 +36,7 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>Since internal storage is handled by a {@Deque object},
-     * no shifting is involved.
-     *
+     * @inheritDoc
      * @return the {@code Element} at the front of the {@code Queue}(removal)
      * @see ArrayDeque#delete()
      * @see java.util.Queue#remove()
@@ -56,9 +47,7 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return the {@code Element} at the front of the {@code Queue}
+     * @inheritDoc
      * @see ArrayDeque#peek()
      * @see java.util.Queue#peek()
      */

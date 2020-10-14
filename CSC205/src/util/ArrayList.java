@@ -50,8 +50,8 @@ public class ArrayList<E> implements List<E> {
      * @param array the array to be converted.
      */
     public ArrayList(final E[] array){
-        this();
-        for(final E e: array) add(e);
+        internal = array;
+        size = 0;
     }
 
     /**

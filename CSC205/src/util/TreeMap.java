@@ -70,9 +70,7 @@ public class TreeMap<K, V> implements Map<K, V> {
      * @param comp the {@code Comparator} to be used.
      */
     public TreeMap(EllieComparator<K> comp) {
-
         this.comp = comp;
-
     }
 
     /**
@@ -80,14 +78,12 @@ public class TreeMap<K, V> implements Map<K, V> {
      * {@code Object#hashCode() Comparator}.
      */
     public TreeMap() {
-
         this(new EllieComparator<>() {
             @Override
             public int compare(K k, K kx) {
                 return EllieComparator.super.compare(k, kx);
             }
         });
-
     }
 
     /**
@@ -101,11 +97,9 @@ public class TreeMap<K, V> implements Map<K, V> {
      */
     @Override
     public void put(K key, V value) {
-
         Node<K, V> put = createNodeAt(key);
         put.value = value;
         balance(put);
-
     }
 
     /**
@@ -121,11 +115,9 @@ public class TreeMap<K, V> implements Map<K, V> {
      */
     @Override
     public V get(K key) {
-
         Node<K, V> nav = navigateTo(key);
         if (nav == null) return null;
         return nav.value;
-
     }
 
 
@@ -139,12 +131,10 @@ public class TreeMap<K, V> implements Map<K, V> {
      */
     @Override
     public V remove(K key) {
-
         Node<K, V> nav = navigateTo(key);
         if (nav == null) return null;
         size--;
         return deleteNode(nav);
-
     }
 
     /**
@@ -152,9 +142,7 @@ public class TreeMap<K, V> implements Map<K, V> {
      */
     @Override
     public int size() {
-
         return size;
-
     }
 
     /**
@@ -162,9 +150,7 @@ public class TreeMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean isEmpty() {
-
         return root == null;
-
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -275,7 +261,6 @@ public class TreeMap<K, V> implements Map<K, V> {
      * A method to navigate to the node with the given key.
      */
     private Node<K, V> navigateTo(final K key) {
-
         if(root == null) return null;
         if (key == null)
             throw new NullPointerException();
@@ -294,7 +279,6 @@ public class TreeMap<K, V> implements Map<K, V> {
                 return nav;
             }
         }
-
     }
 
     /*
@@ -302,7 +286,6 @@ public class TreeMap<K, V> implements Map<K, V> {
      * or an already existing node which holds the given key.
      */
     private Node<K, V> createNodeAt(final K key) {
-
         if (key == null)
             throw new NullPointerException();
         Node<K, V> nav = root;
@@ -332,7 +315,6 @@ public class TreeMap<K, V> implements Map<K, V> {
         return root = new Node<>(
                 key, Color.BLACK, null
         );
-
     }
 
     /*
@@ -341,40 +323,28 @@ public class TreeMap<K, V> implements Map<K, V> {
      * inevitable Null Pointer.
      */
     private Node<K, V> parentOf(final Node<K, V> curr) {
-
         return curr == null ? null : curr.parent;
-
     }
 
     private Node<K, V> grandParentOf(final Node<K, V> curr) {
-
         return curr == null || curr.parent == null ?
                 null : curr.parent.parent;
-
     }
 
     private Node<K, V> rightOf(final Node<K, V> curr) {
-
         return curr == null ? null : curr.right;
-
     }
 
     private Node<K, V> leftOf(final Node<K, V> curr) {
-
         return curr == null ? null : curr.left;
-
     }
 
     private Color colorOf(final Node<K, V> curr) {
-
         return curr == null ? Color.BLACK : curr.color;
-
     }
 
     private void setColor(final Node<K, V> curr, final Color color) {
-
         if (curr != null) curr.color = color;
-
     }
 
     /*
@@ -483,7 +453,6 @@ public class TreeMap<K, V> implements Map<K, V> {
      *      - java.util
      */
     private void rotateLeft(final Node<K, V> curr) {
-
         if (curr != null) {
             Node<K, V> rr = curr.right;
             curr.right = rr.left;
@@ -498,7 +467,6 @@ public class TreeMap<K, V> implements Map<K, V> {
             rr.left = curr;
             curr.parent = rr;
         }
-
     }
 
     /*
@@ -518,7 +486,6 @@ public class TreeMap<K, V> implements Map<K, V> {
      *      - java.util
      */
     private void rotateRight(final Node<K, V> curr) {
-
         if (curr != null) {
             Node<K, V> ll = curr.left;
             curr.left = ll.right;
@@ -533,7 +500,6 @@ public class TreeMap<K, V> implements Map<K, V> {
             ll.right = curr;
             curr.parent = ll;
         }
-
     }
 
     /*
@@ -556,7 +522,6 @@ public class TreeMap<K, V> implements Map<K, V> {
      *                                   4R - current node
      */
     private Node<K, V> successor(final Node<K, V> n) {
-
         Node<K, V> x;
         if (n.right != null) {
             // Successor will be the minimum value from the
@@ -577,7 +542,6 @@ public class TreeMap<K, V> implements Map<K, V> {
             }
             return y;
         }
-
     }
 
     /*
@@ -600,7 +564,6 @@ public class TreeMap<K, V> implements Map<K, V> {
      *                               5R - current node
      */
     private Node<K, V> predecessor(final Node<K, V> n) {
-
         Node<K, V> x;
         if (n.left != null) {
             // predecessor will be the maximum value from the
@@ -621,7 +584,6 @@ public class TreeMap<K, V> implements Map<K, V> {
             }
             return y;
         }
-
     }
 
     /*
@@ -629,7 +591,6 @@ public class TreeMap<K, V> implements Map<K, V> {
      * Replacement.
      */
     private void transplant(final Node<K, V> o, final Node<K, V> n) {
-
         if (o.parent == null)
             root = n;
         else if (o == o.parent.left)
@@ -638,14 +599,12 @@ public class TreeMap<K, V> implements Map<K, V> {
         if (n != null)
             n.parent = o.parent;
         else o.parent = null;
-
     }
 
     /*
      * An algorithm for the deletion of a node.
      */
     private V deleteNode(Node<K, V> n) {
-
         V nValue = null;
         if (n.left != null && n.right != null) {
             // n is internal. n has two children.
@@ -685,7 +644,6 @@ public class TreeMap<K, V> implements Map<K, V> {
             transplant(n, null);
         }
         return nValue;
-
     }
 
     /*
@@ -790,36 +748,30 @@ public class TreeMap<K, V> implements Map<K, V> {
      * in key order.
      */
     private String inOrderBuild(final Node<K, V> curr) {
-
         if (curr == null) return "";
         return inOrderBuild(curr.left) + (
                 curr.key + "=" + curr.value + ", "
         ) + inOrderBuild(curr.right);
-
     }
 
     /*
      * A method that builds a String in pre-order.
      */
     private String preOrderBuild(final Node<K, V> curr) {
-
         if (curr == null) return "";
         return curr.key + "=" + curr.value + ", " +
                 preOrderBuild(curr.left) +
                 preOrderBuild(curr.right);
-
     }
 
     /*
      * A method that builds a String in post-order.
      */
     private String postOrderBuild(final Node<K, V> curr) {
-
         if (curr == null) return "";
         return postOrderBuild(curr.left) +
                 postOrderBuild(curr.right) +
                 curr.key + "=" + curr.value + ", ";
-
     }
 
     /*
@@ -827,12 +779,10 @@ public class TreeMap<K, V> implements Map<K, V> {
      * colors, and depths.
      */
     private String buildDepthChart(final Node<K, V> curr, final int depth) {
-
         if (curr == null) return "";
         return buildDepthChart(curr.left, depth - 1) + (
                 curr.key + "-" + curr.color + "-" + depth + ", "
         ) + buildDepthChart(curr.right, depth - 1);
-
     }
 
     /*
@@ -840,13 +790,11 @@ public class TreeMap<K, V> implements Map<K, V> {
      * reflecting equality between two TreeMaps.
      */
     private boolean splitEq(final Node<K, V> other, final Node<K, V> curr) {
-
         if (other == null) return curr == null;
         if (curr == null) return false;
         return splitEq(other.left, curr.left)
                 && ((other.equals(curr))
                 && splitEq(other.right, curr.right));
-
     }
 
     /*
@@ -854,13 +802,11 @@ public class TreeMap<K, V> implements Map<K, V> {
      * representative of its data.
      */
     private int splitHash(final Node<K, V> curr, int hash) {
-
         if (curr == null) return 0;
         hash = EllieCollections.HASH_CODE_CONST * hash + curr.hashCode();
         return splitHash(curr.left, hash) +
                 hash +
                 splitHash(curr.right, hash);
-
     }
 
     /*
@@ -877,13 +823,11 @@ public class TreeMap<K, V> implements Map<K, V> {
      */
     @Override
     public String toString() {
-
         String str = inOrderBuild(root);
         return "[" + (
                 str.length() >= TRIM_CONSTANT?
                         str.substring(0, str.length() - TRIM_CONSTANT): ""
         ) + "]";
-
     }
 
     /**
@@ -891,9 +835,7 @@ public class TreeMap<K, V> implements Map<K, V> {
      */
     @Override
     public String toStore() {
-
         return toString();
-
     }
 
     /**
@@ -903,7 +845,6 @@ public class TreeMap<K, V> implements Map<K, V> {
     @Override
     @SuppressWarnings("Unchecked")
     public boolean equals(Object other) {
-
         if (this == other) return true;
         if (other == null) return false;
         if (!(other instanceof TreeMap)) return false;
@@ -911,7 +852,6 @@ public class TreeMap<K, V> implements Map<K, V> {
         if (this.root == null) return cast.root != null;
         if (cast.root == null) return false;
         return this.splitEq(cast.root, this.root);
-
     }
 
     /**
@@ -920,9 +860,7 @@ public class TreeMap<K, V> implements Map<K, V> {
      */
     @Override
     public int hashCode() {
-
         return splitHash(root, 1);
-
     }
 
 }

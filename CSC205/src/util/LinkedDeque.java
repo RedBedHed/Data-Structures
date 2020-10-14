@@ -49,17 +49,9 @@ public class LinkedDeque<E> implements Deque<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>A new link is initialized to replace the head. The element is
-     * assigned to the current head's {@code storage} variable. the current
-     * head's {@code prev} variable is assigned to the new link. the new link's
-     * {@code next} variable is assigned to the current head. The new link
-     * is then assigned to the {@code head} variable, effectively positioning
-     * it as the new head.
-     *
-     * @param element the element to be inserted.
+     * @inheritDoc
      */
+    @Override
     public void insertOnFront(final E element) {
         Link<E> replacement = new Link<>();
         head.store = element;
@@ -70,17 +62,7 @@ public class LinkedDeque<E> implements Deque<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>This method is essentially the inverse of {@code insertOnFront()}
-     * A new link is initialized to replace the head. The element is
-     * assigned to the current tails's {@code storage} variable. the current
-     * tail's {@code next} variable is assigned to the new link. the new link's
-     * {@code prev} variable is assigned to the current tail. The new link
-     * is then assigned to the {@code tail} variable, effectively positioning
-     * it as the new tail.
-     *
-     * @param element
+     * @inheritDoc
      * @see LinkedDeque#insertOnFront(E)
      */
     @Override
@@ -97,11 +79,6 @@ public class LinkedDeque<E> implements Deque<E> {
      * {@inheritDoc}
      *
      * <p>If the {@code Deque} is empty then this method will return null.
-     * If not empty, the method decrements the {@code size variable} and
-     * assigns the storage of the last link to a temporary variable.
-     * The head then moves to the last link, assigning the old head to null
-     * and leaving it to be garbage collected. Finally, the temporary variable's
-     * contents are returned.
      */
     @Override
     public E delete() {
@@ -117,14 +94,10 @@ public class LinkedDeque<E> implements Deque<E> {
      * {@inheritDoc}
      *
      * <p>If the {@code Deque} is empty then this method will return null.
-     * If not empty, the method decrements the {@code size variable} and
-     * assigns the storage of the last link to a temporary variable.
-     * The tail then moves to the last link, assigning the old tail to null
-     * and leaving it to be garbage collected. Finally, the temporary variable's
-     * contents are returned.
      *
      * @return the element at the back of the {@code Deque}
      */
+    @Override
     public E deleteFromBack() {
         if (isEmpty()) return null;
         size--;
@@ -147,6 +120,7 @@ public class LinkedDeque<E> implements Deque<E> {
      *
      * @return the element at the back of the Deque
      */
+    @Override
     public E peekFromBack() {
         return tail.prev.store;
     }

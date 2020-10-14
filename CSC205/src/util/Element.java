@@ -13,12 +13,12 @@ public final class Element<E> {
     /**
      * The priority of the {@code Element}.
      */
-    protected int priority;
+    protected final int priority;
 
     /**
      * The storage of the {@code Element}.
      */
-    protected E store;
+    protected final E store;
 
     /**
      * A public constructor for an {@code Element}.

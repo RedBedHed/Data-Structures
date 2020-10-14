@@ -27,11 +27,7 @@ public class LinkedStack<E> implements Stack<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>This method creates a new {@code Link} and attaches it to the front
-     * of the {@code internal Deque}.
-     *
+     * @inheritDoc
      * @param element the element being pushed
      * @see LinkedDeque#insertOnFront(E)
      */
@@ -43,10 +39,7 @@ public class LinkedStack<E> implements Stack<E> {
     /**
      * {@inheritDoc}
      *
-     * <P>If the {@code Stack} is empty, the method returns null. Otherwise,
-     * the top element is deleted and returned. This method then sets the front
-     * {@code Link}'s reference to null, leaving the {@code Link} for garbage
-     * collection.
+     * <P>If the {@code Stack} is empty, this method returns null.
      *
      * @return the element at the top of the {@code Stack}
      * @see LinkedDeque#delete()

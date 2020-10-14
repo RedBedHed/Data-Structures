@@ -26,11 +26,7 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>Since internal storage is handled by a {@Deque object},
-     * no shifting is involved.
-     *
+     * @inheritDoc
      * @param input {@code Element}
      * @see ArrayDeque#insertOnFront(E)
      * @see java.util.Stack#push(E)
@@ -41,11 +37,7 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * <p>Since internal storage is handled by a {@Deque object},
-     * no shifting is involved.
-     *
+     * @inheritDoc
      * @return the {@code Element} at the top of the {@code Stack}(removal)
      * @see ArrayDeque#delete()
      * @see java.util.Stack#pop()
